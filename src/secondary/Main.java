@@ -11,14 +11,19 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 public class Main extends Application {
     Customers customers;
     TableView<Customer> customerTableView;
+    String customerFile = "custFile.txt";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        this.createFile(customerFile);
         this.customers = new Customers();
         this.customers = loadData(customers);
         // Borderpane for root.
@@ -33,7 +38,6 @@ public class Main extends Application {
         fileMenu.getItems().addAll(newCustomer);
         newCustomer.setOnAction(e -> {
             Customer customer = new NewCustomerStage().getCustomer();
-            System.out.println(customer);
             this.customers.addCustomer(customer);
         });
 
@@ -46,6 +50,7 @@ public class Main extends Application {
         root.setTop(mBar);
 
         customerTableView = updateTableView(this.customers);
+        customerTableView.refresh();
 
         root.setCenter(customerTableView);
         // END TABLE VIEW -----------------------------
@@ -56,7 +61,11 @@ public class Main extends Application {
         bottomBox.setPadding(new Insets(10));
         Button updateButton = new Button("Update");
         updateButton.setOnAction(e -> {
-            this.customerTableView.refresh();
+            customerTableView = this.updateTableView(customers);
+            customerTableView.refresh();
+            for (Customer customer : customers.getCustomerList()) {
+                System.out.println(customer);
+            }
         });
         Button newFlightButton = new Button("New Flight");
         newFlightButton.setOnAction(e -> {
@@ -114,6 +123,21 @@ public class Main extends Application {
             customerTableView.getItems().add(customer);
         }
         return customerTableView;
+    }
+
+    public void createFile(String str) {
+        Path path = Paths.get("src/resources/" + str);
+        if (Files.exists(path)) {
+            System.out.println(str + " file already exists");
+        } else {
+            try {
+                Files.createFile(path);
+                System.out.println(str+" file created successfully");
+            } catch (Exception err) {
+                System.out.println(err.getMessage());
+                System.out.println("unable to create file");
+            }
+        }
     }
 
     public static void main(String[] args) {
