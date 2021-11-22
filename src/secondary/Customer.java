@@ -8,6 +8,13 @@ public class Customer {
     Gender gender;
     double discount;  //0.0 if no discount
 
+    // Make sure we also have a no-args constructor
+    public Customer(){
+        this.firstName = "";
+        this.lastName = "";
+        this.age = "";
+    }
+
     public Customer(String firstName, String lastName, String age, Gender gender) {
 
         this.firstName = firstName;

@@ -41,13 +41,20 @@ public class Main extends Application {
         root.setTop(mBar);
         root.setBottom(tBar);
 
+        // Create our TableView with the customer data
+        TableView<Customer> customerTableView = new TableView<>();
+        // Create the columns to add to the tableview
+        TableColumn<Customer,String>
+
         Scene scene1 = new Scene(root,400,400);
         primaryStage.setScene(scene1);
         primaryStage.show();
+
 
 
     }
     public static void main(String[] args) {
         launch();
     }
+
 }
