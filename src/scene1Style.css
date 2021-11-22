@@ -5,6 +5,7 @@
     -fx-pref-height: 200px;
 }
 .button{
+    /*Default Buttons*/
     -fx-background-color: cornflowerblue;
     -fx-font-size: 13;
     -fx-text-fill: white;
