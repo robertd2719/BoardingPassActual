@@ -1,0 +1,26 @@
+.root{
+    -fx-background-color: aliceblue;
+    -fx-alignment: top-center;
+    -fx-pref-width: 300px;
+    -fx-pref-height: 200px;
+}
+.button{
+    -fx-background-color: cornflowerblue;
+    -fx-font-size: 13;
+    -fx-text-fill: white;
+    -fx-pref-width: 100px;
+
+}
+#button-box{
+    -fx-alignment: center;
+    -fx-padding: 10px;
+}
+/*.button-bar{*/
+/*    -fx-padding: 10px;*/
+/*}*/
+/*
+    For setting id on elements remember it is the same with a #IdName
+*/
+#button2{
+    -fx-background-color: tomato;
+}
