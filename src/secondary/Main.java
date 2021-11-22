@@ -1,21 +1,24 @@
 package secondary;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.awt.event.ActionEvent;
 
 
 public class Main extends Application {
-
+        Customers customers;
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Customers customers = new Customers();
-        customers = loadData(customers);
+        this.customers = new Customers();
+        this.customers = loadData(customers);
         // Borderpane for root.
         BorderPane root = new BorderPane();
 
@@ -29,7 +32,7 @@ public class Main extends Application {
         newCustomer.setOnAction(e->{
             Customer customer = new NewCustomerStage().getCustomer();
             System.out.println(customer);
-
+            this.customers.addCustomer(customer);
         });
 
 //          Add all menus to bar
@@ -64,6 +67,9 @@ public class Main extends Application {
         customerTableView.getColumns().add(genderColumn);
         customerTableView.getColumns().add(discountColumn);
 
+        // remove the extra column from the object
+        customerTableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         //load data from customers into the table
 //        for(Customer customer: customers.getCustomerList()){
 //            customerTableView.getItems().add(customer);
@@ -73,20 +79,34 @@ public class Main extends Application {
         }
 
         root.setCenter(customerTableView);
+        // END TABLE VIEW -----------------------------
 
+        // BOTTOM BOX AND BUTTONS
+        HBox bottomBox = new HBox(10);
+        bottomBox.setAlignment(Pos.CENTER);
+        bottomBox.setPadding(new Insets(10));
+        Button updateButton = new Button("Update");
+        Button newFlightButton = new Button("New Flight");
+        newFlightButton.setOnAction(e->{
+            Customer customer = customerTableView.getSelectionModel().getSelectedItem();
+            System.out.println(customer);
+        });
+        bottomBox.getChildren().addAll(updateButton,newFlightButton);
+        root.setBottom(bottomBox);
+        // END HBOX AND BOTTOM BUTTONS-----------------
         Scene scene1 = new Scene(root,400,400);
         primaryStage.setScene(scene1);
         primaryStage.show();
     }
-    public static Customers loadData(Customers customers){
+    public Customers loadData(Customers customers){
         Customer customer1 = new Customer("Robert","Deal","22",Gender.MALE);
         Customer customer2 = new Customer("Mary","Jones","10",Gender.FEMALE);
         Customer customer3 = new Customer("Judge","Judy","88",Gender.FEMALE);
         Customer customer4 = new Customer("Opie","Taylor","8",Gender.MALE);
-        customers.addCustomer(customer1);
-        customers.addCustomer(customer2);
-        customers.addCustomer(customer3);
-        customers.addCustomer(customer4);
+        this.customers.addCustomer(customer1);
+        this.customers.addCustomer(customer2);
+        this.customers.addCustomer(customer3);
+        this.customers.addCustomer(customer4);
         return customers;
     }
     public static void main(String[] args) {
