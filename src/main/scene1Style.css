@@ -12,6 +12,9 @@
     -fx-pref-width: 100px;
 
 }
+.password-field, .text-field{
+    -fx-background-color: lightblue;
+}
 #button-box{
     -fx-alignment: center;
     -fx-padding: 10px;

@@ -1,7 +1,7 @@
+package main;
+
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -36,6 +36,7 @@ public class Main extends Application {
         Label passWord = new Label("Password: ");
         PasswordField passField = new PasswordField();
 
+        // GridPane ----------------------------------------------------------------->
         GridPane logGrid = new GridPane();
         // add the elements to the gridpane
         logGrid.add(userName,0,0,1,1);
@@ -46,9 +47,11 @@ public class Main extends Application {
         logGrid.setPadding(new Insets(10,10,10,10));
         logGrid.setHgap(10);
         logGrid.setVgap(10);
+        // GridPane ----------------------------------------------------------------->
 
-        //BUTTONS
-        // Button1
+        //BUTTONS ---------------------------------------------------------------------->
+
+        // Button1 --------->
         Button button1 = new Button("Login ");
         button1.setId("button1");
         button1.setOnAction(e->{
@@ -61,28 +64,28 @@ public class Main extends Application {
                 PopUp authenticated = new PopUp(message);
         });
 
-        // Button 2
+        // Button 2---------->
         Button button2 = new Button("Exit");
         button2.setId("button2");
         button2.setOnAction(e->primaryStage.close());
-        // Button Bar to hold all of our buttons
-//        ButtonBar logBar = new ButtonBar();
-//        logBar.getButtons().addAll(button1,button2);
-        // we can do the same thing with an h-box and not incur all the overhead of the button-bar class
+        //<---END BUTTONS ------------------------------------------------------------>
+
+        // HBox--------->
         HBox buttonBox = new HBox(10);
         buttonBox.setId("button-box");
         buttonBox.getChildren().addAll(button1,button2);
 
-        //<---END BUTTONS ----------->
-
+        // add all children elements to the scene.
         root.getChildren().addAll(cityView,logGrid,buttonBox);
 
+        // set initial scene for login -- can and will redesign.
         Scene scene1 = new Scene(root);
-        scene1.getStylesheets().add("scene1Style.css");
+        scene1.getStylesheets().add("main/scene1Style.css");
         primaryStage.setScene(scene1);
         primaryStage.show();
     }
 
+        // Main class runner
         public static void main (String[]args){
             launch();
         }
