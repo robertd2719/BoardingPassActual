@@ -3,12 +3,14 @@ package secondary;
 import java.util.ArrayList;
 
 public class Customers {
-    private ArrayList<Customer> customerList;
+    public ArrayList<Customer> customerList;
+
     public Customers(){
+        this.customerList = new ArrayList<>();
     }
 
     public ArrayList<Customer> getCustomerList() {
-        return customerList;
+        return this.customerList;
     }
 
     public void setCustomerList(ArrayList<Customer> customerList) {
@@ -16,7 +18,7 @@ public class Customers {
     }
 
     public void addCustomer(Customer customer){
-        this.getCustomerList().add(customer);
+        this.customerList.add(customer);
     }
 
 }

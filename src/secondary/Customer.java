@@ -13,6 +13,8 @@ public class Customer {
         this.firstName = "";
         this.lastName = "";
         this.age = "";
+        this.gender = null;
+        this.discount = 0;
     }
 
     public Customer(String firstName, String lastName, String age, Gender gender) {
@@ -28,6 +30,8 @@ public class Customer {
             this.discount = 0.5;
         } else if  ( this.gender == Gender.FEMALE){
             this.discount = 0.25;
+        } else {
+            this.discount = 0;
         }
     }
 
